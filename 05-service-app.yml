@@ -3,14 +3,14 @@ kind: Service
 metadata:
   name: wordpress
   namespace: appweb
-  labels:
-    app: wordpress
 spec:
-  ports:
-    - port: 80
-      NodePort: 30080
-#    - port: 443
-#      NodePort: 30443
   selector:
     app: wordpress
-  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP #default
+      nodePort: 31000
+  type: LoadBalancer
+
+
