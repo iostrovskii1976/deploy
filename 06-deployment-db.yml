@@ -25,8 +25,8 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: db-pass
-              key: password
+              name: db-secret
+              key: db-root-password
         - name: MYSQL_DATABASE
           value: wordpress
         - name: MYSQL_USER
@@ -34,8 +34,8 @@ spec:
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: db-pass
-              key: password
+              name: db-secret
+              key: mdb-root-password
         ports:
         - containerPort: 3306
           name: mariadb
