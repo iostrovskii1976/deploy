@@ -19,7 +19,7 @@ spec:
         tier: mariadb
     spec:
       containers:
-      - image: mmariadb:11.4
+      - image: mariadb:11.4
         name: mariadb
         env:
         - name: MYSQL_ROOT_PASSWORD
