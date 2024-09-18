@@ -3,13 +3,12 @@ kind: Service
 metadata:
   name: db-internal-service
   namespace: appweb
-selector:
-  app: mariadb
 spec:
-  type: ClusterIP
+  selector:
+    app: mariadb
   ports:
-  - name: mariadb-port
-    protocol: TCP
-    port: 3306
-    targetPort: 3306
-    protocol: TCP
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  clusterIP: None
+  
