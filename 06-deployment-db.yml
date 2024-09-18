@@ -4,7 +4,7 @@ metadata:
   name: mariadb-deploy
   namespace: appweb
 spec: 
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: mariadb
