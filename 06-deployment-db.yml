@@ -11,8 +11,8 @@ spec:
     matchLabels:
       app: wordpress
       tier: mariadb
-  strategy:
-    type: Recreate
+#  strategy:
+#    type: Recreate
   template:
     metadata:
       labels:
