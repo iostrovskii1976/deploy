@@ -5,10 +5,12 @@ metadata:
   namespace: appweb
 spec:
   selector:
-    app: mariadb
+#    app: mariadb
+    run: mariadb
   ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
-  clusterIP: None
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+#  clusterIP: None
+  type: NodePort
   
