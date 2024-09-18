@@ -1,20 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mariadb-deployment
-spec: # specification for deployment resource
-  replicas: 1
+  name: mariadb-deploy
+  namespace: appweb
+spec: 
+  replicas: 2
   selector:
     matchLabels:
       app: mariadb
-  template: # blueprint for Pod
+  template:
     metadata:
       labels:
-        app: mariadb # service will look for this label
-    spec: # specification for Pod
+        app: mariadb 
+    spec: 
       containers:
       - name: mariadb
         image: mariadb
+        args:
+          - sleep
+          - "100000"
         ports:
         - containerPort: 3306 #default one
         env:
@@ -25,3 +29,9 @@ spec: # specification for deployment resource
               key: db-root-password
         - name: MARIADB_DATABASE
           value: wordpress
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: db-volume
+      volumes:
+      - name: db-volume
+        emptyDir: {}
