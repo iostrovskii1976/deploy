@@ -5,8 +5,8 @@ metadata:
   namespace: appweb
 spec:
   selector:
-#    app: wordpress
-    run: wordpress
+    app: wordpress
+#    run: wordpress
   ports:
   - port: 80
 #    targetPort: 80
