@@ -2,42 +2,39 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress
-  namespace: appweb
-  labels:
-    app: wordpress
-spec:
+spec: 
   replicas: 2
   selector:
     matchLabels:
       app: wordpress
-      tier: frontend
-#  strategy:
-#    type: Recreate
-  template:
+  template: 
     metadata:
       labels:
         app: wordpress
-        tier: frontend
-    spec:
+    spec: # specification for Pod
       containers:
-      - image: wordpress:6.6
-        name: wordpress
+      - name: wordpress
+        image: wordpress:latest 
+        ports:
+        - containerPort: 80
         env:
         - name: WORDPRESS_DB_HOST
-          value: wordpress-db
+          valueFrom:
+            configMapKeyRef:
+              name: db-configmap
+              key: database_url
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: db-secret
               key: db-root-password
         - name: WORDPRESS_DB_USER
-          value: wordpress
-        ports:
-        - containerPort: 80
-          name: wordpress
+          value: root
+        - name: WORDPRESS_DEBUG
+          value: "1"
         volumeMounts:
         - name: wordpress-volume
           mountPath: /var/www/html
-      volumes:
-      - name: wordpress-volume
+        volumes:
+        - name: wordpress-volume
         emptyDir: {}
