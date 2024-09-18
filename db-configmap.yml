@@ -4,4 +4,4 @@ metadata:
   name: db-configmap
   namespace: appweb
 data:
-  database_url: mariadb-internal-service
+  database_url: db-internal-service
