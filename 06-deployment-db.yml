@@ -1,48 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-db
-  namespace: appweb
-  labels:
-    app: wordpress
-spec:
+  name: mariadb-deployment
+spec: # specification for deployment resource
   replicas: 1
   selector:
     matchLabels:
-      app: wordpress
-      tier: mariadb
-#  strategy:
-#    type: Recreate
-  template:
+      app: mariadb
+  template: # blueprint for Pod
     metadata:
       labels:
-        app: wordpress
-        tier: mariadb
-    spec:
+        app: mariadb # service will look for this label
+    spec: # specification for Pod
       containers:
-      - image: mariadb:11.4
-        name: mariadb
+      - name: mariadb
+        image: mariadb
+        ports:
+        - containerPort: 3306 #default one
         env:
-        - name: MYSQL_ROOT_PASSWORD
+        - name: MARIADB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: db-secret
               key: db-root-password
-        - name: MYSQL_DATABASE
+        - name: MARIADB_DATABASE
           value: wordpress
-        - name: MYSQL_USER
-          value: wordpress
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: mdb-root-password
-        ports:
-        - containerPort: 3306
-          name: mariadb
-        volumeMounts:
-        - name: mariadb-volume
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mariadb-volume
-        emptyDir: {}
