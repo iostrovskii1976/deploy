@@ -1,14 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-db
-  namespace: appweb
-  labels:
-    app: wordpress
+  name: mariadb-internal-service
 spec:
-  ports:
-    - port: 3306
   selector:
-    app: wordpress
-    tier: mariadb
-  clusterIP: None
+    app: mariadb
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
