@@ -15,7 +15,7 @@ spec:
     spec: # specification for Pod
       containers:
       - name: wordpress
-        image: wordpress-nginx #wordpress:latest 
+        image: quay.io/shesselink81/wordpress-nginx:v6.4.3.0 #wordpress:latest 
         ports:
         - containerPort: 80
         env:
