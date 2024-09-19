@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: wordpress
-    spec: # specification for Pod
+    spec: 
       containers:
       - name: wordpress
         image: wordpress:latest 
