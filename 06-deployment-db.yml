@@ -16,9 +16,6 @@ spec:
       containers:
       - name: mariadb
         image: mariadb
-        args:
-          - sleep
-          - "100000"
         ports:
         - containerPort: 3306 #default one
         env:
